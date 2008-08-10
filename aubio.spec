@@ -34,6 +34,8 @@ Main library for %{name}.
 Summary:	Development files for %{name}
 Group:		Development/C++
 Requires:	%{libname} = %{version}-%{release}
+Provides:	%{name} = %{version}-%{release}
+Provides:	lib%{name} = %{version}-%{release}
 
 %description -n %{develname}
 Development files and headers for %{name}.
