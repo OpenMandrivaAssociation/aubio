@@ -11,6 +11,13 @@ Group:		Sound
 Url:		http://aubio.org/
 Source0:	http://aubio.org/pub/aubio-0.3.2.tar.bz2
 BuildRequires:	fftw3-devel
+BuildRequires:	libsndfile-devel
+BuildRequires:	libsamplerate-devel
+BuildRequires:	libalsa-devel
+BuildRequires:	swig
+BuildRequires:	lash-devel
+BuildRequires:	pd-devel
+%py_requires -d
 Requires:	%{libname} = %{version}-%{release}
 BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 
@@ -76,7 +83,6 @@ Python bindings for %{name}.
 %defattr(-,root,root)
 %doc AUTHORS README THANKS TODO
 %{_bindir}/*
-%{_mandir}/man1/*
 %{_datadir}/sounds/*
 
 %files -n %{libname}
@@ -92,4 +98,4 @@ Python bindings for %{name}.
 
 %files -n python-%{name}
 %defattr(-,root,root)
-%{py_sitedir}/*
+%{python_sitelib}/*
