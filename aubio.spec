@@ -7,7 +7,7 @@ Name:		aubio
 Version:	0.3.2
 Release:	%mkrel 1
 License:	GPLv2+
-Group:		sound
+Group:		Sound
 Url:		http://aubio.org/
 Source0:	http://aubio.org/pub/aubio-0.3.2.tar.bz2
 BuildRequires:	fftw3-devel
