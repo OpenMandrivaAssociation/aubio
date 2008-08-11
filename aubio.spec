@@ -5,7 +5,7 @@
 Summary:	A library for audio labelling
 Name:		aubio
 Version:	0.3.2
-Release:	%mkrel 1
+Release:	%mkrel 2
 License:	GPLv2+
 Group:		Sound
 Url:		http://aubio.org/
@@ -41,8 +41,8 @@ Main library for %{name}.
 Summary:	Development files for %{name}
 Group:		Development/C++
 Requires:	%{libname} = %{version}-%{release}
-Provides:	%{name} = %{version}-%{release}
-Provides:	lib%{name} = %{version}-%{release}
+Provides:	%{name}-devel = %{version}-%{release}
+Provides:	lib%{name}-devel = %{version}-%{release}
 
 %description -n %{develname}
 Development files and headers for %{name}.
