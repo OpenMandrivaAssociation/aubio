@@ -86,7 +86,7 @@ Python bindings for %{name}.
 %doc AUTHORS README THANKS TODO
 %{_bindir}/*
 %{_datadir}/sounds/*
-%{_mandir}/man1/%{name}*
+%{_mandir}/man1/*
 
 %files -n %{libname}
 %defattr(-,root,root)
