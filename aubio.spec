@@ -5,11 +5,12 @@
 Summary:	A library for audio labelling
 Name:		aubio
 Version:	0.3.2
-Release:	%mkrel 2
+Release:	%mkrel 3
 License:	GPLv2+
 Group:		Sound
 Url:		http://aubio.org/
 Source0:	http://aubio.org/pub/aubio-0.3.2.tar.bz2
+Patch0:		%{name}-0.3.2-format_not_a_string_literal_and_no_format_arguments.patch
 BuildRequires:	fftw3-devel
 BuildRequires:	libsndfile-devel
 BuildRequires:	libsamplerate-devel
@@ -17,7 +18,6 @@ BuildRequires:	libalsa-devel
 BuildRequires:	swig
 BuildRequires:	lash-devel
 BuildRequires:	pd-devel
-%py_requires -d
 Requires:	%{libname} = %{version}-%{release}
 BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 
@@ -51,12 +51,14 @@ Development files and headers for %{name}.
 Summary:	Python bindings for %{name}
 Group:		Development/Python
 Requires:	%{libname} = %{version}-%{release}
+%py_requires -d
 
 %description -n python-%{name}
 Python bindings for %{name}.
 
 %prep
-%setup -q %{name}-%{version}
+%setup -q
+%patch0 -p1
 
 %build
 %configure2_5x
@@ -84,6 +86,7 @@ Python bindings for %{name}.
 %doc AUTHORS README THANKS TODO
 %{_bindir}/*
 %{_datadir}/sounds/*
+%{_mandir}/man1/%{name}*
 
 %files -n %{libname}
 %defattr(-,root,root)
