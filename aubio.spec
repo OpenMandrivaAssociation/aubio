@@ -61,6 +61,8 @@ Python bindings for %{name}.
 %patch0 -p1
 
 %build
+%define _disable_ld_no_undefined 1
+export CPPFLAGS="%{optflags} -I%{_includedir}/pd"
 %configure2_5x
 
 %make
@@ -86,12 +88,12 @@ Python bindings for %{name}.
 %doc AUTHORS README THANKS TODO
 %{_bindir}/*
 %{_datadir}/sounds/*
-%{_mandir}/man1/*
 
 %files -n %{libname}
 %defattr(-,root,root)
 %{_libdir}/*.so.%{major}*
-
+%{_libdir}/pd
+                  
 %files -n %{develname}
 %defattr(-,root,root)
 %{_includedir}/%{name}
