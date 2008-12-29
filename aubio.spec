@@ -72,6 +72,12 @@ export CPPFLAGS="%{optflags} -I%{_includedir}/pd"
 
 %makeinstall_std
 
+%ifnarch ix86
+
+mv -f %{buildroot}%{_prefix}/lib/pd %{buildroot}%{_libdir}/pd
+
+%endif
+
 %if %mdkversion < 200900
 %post -n %{libname} -p /sbin/ldconfig
 %endif
