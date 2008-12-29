@@ -5,7 +5,7 @@
 Summary:	A library for audio labelling
 Name:		aubio
 Version:	0.3.2
-Release:	%mkrel 4
+Release:	%mkrel 5
 License:	GPLv2+
 Group:		Sound
 Url:		http://aubio.org/
