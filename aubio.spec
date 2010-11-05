@@ -19,6 +19,7 @@ BuildRequires:	libalsa-devel
 BuildRequires:	swig
 BuildRequires:	lash-devel
 BuildRequires:	pd-devel
+BuildRequires:	docbook-to-man
 Requires:	%{libname} = %{version}-%{release}
 BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 
