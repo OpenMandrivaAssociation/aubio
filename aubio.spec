@@ -9,8 +9,9 @@ Release:	%mkrel 7
 License:	GPLv2+
 Group:		Sound
 Url:		http://aubio.org/
-Source0:	http://aubio.org/pub/aubio-0.3.2.tar.bz2
+Source0:	http://aubio.org/pub/%{name}-%{version}.tar.bz2
 Patch0:		%{name}-0.3.2-format_not_a_string_literal_and_no_format_arguments.patch
+Patch1:		aubio-0.3.2-fix-link.patch
 BuildRequires:	fftw3-devel
 BuildRequires:	libsndfile-devel
 BuildRequires:	libsamplerate-devel
@@ -59,6 +60,7 @@ Python bindings for %{name}.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p0
 
 %build
 %define _disable_ld_no_undefined 1
@@ -92,6 +94,7 @@ mv -f %{buildroot}%{_prefix}/lib/pd %{buildroot}%{_libdir}/pd
 %doc AUTHORS README THANKS TODO
 %{_bindir}/*
 %{_datadir}/sounds/*
+%{_mandir}/man1/*
 
 %files -n %{libname}
 %defattr(-,root,root)
