@@ -1,0 +1,22 @@
+--- python/aubio/Makefile.am.link	2010-11-05 08:37:37.000000000 +0000
++++ python/aubio/Makefile.am	2010-11-05 08:37:49.000000000 +0000
+@@ -48,7 +48,7 @@
+ if DARWIN
+ SWLDFLAGS = -bundle -framework Python
+ else
+-SWLDFLAGS = -shared
++SWLDFLAGS = -shared -lpython${PYTHON_VERSION}
+ endif
+ endif
+ 
+--- python/aubio/Makefile.in.link	2010-11-05 08:37:57.000000000 +0000
++++ python/aubio/Makefile.in	2010-11-05 08:38:25.000000000 +0000
+@@ -262,7 +262,7 @@
+ 	web/html.py
+ 
+ nodist_pkgpython_PYTHON = aubiowrapper.py _aubiowrapper.so
+-@DARWIN_FALSE@@MINGW_FALSE@SWLDFLAGS = -shared
++@DARWIN_FALSE@@MINGW_FALSE@SWLDFLAGS = -shared -lpython${PYTHON_VERSION}
+ @DARWIN_TRUE@@MINGW_FALSE@SWLDFLAGS = -bundle -framework Python
+ @MINGW_TRUE@SWLDFLAGS = -L${prefix}/bin -lpython${PYTHON_VERSION}
+ CLEANFILES = *.pyc *.so *.o aubio_wrap.c aubiowrapper.py 
