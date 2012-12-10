@@ -5,23 +5,24 @@
 Summary:	A library for audio labelling
 Name:		aubio
 Version:	0.3.2
-Release:	%mkrel 7
+Release:	8
 License:	GPLv2+
 Group:		Sound
 Url:		http://aubio.org/
 Source0:	http://aubio.org/pub/%{name}-%{version}.tar.bz2
 Patch0:		%{name}-0.3.2-format_not_a_string_literal_and_no_format_arguments.patch
 Patch1:		aubio-0.3.2-fix-link.patch
-BuildRequires:	fftw3-devel
-BuildRequires:	libsndfile-devel
-BuildRequires:	libsamplerate-devel
-BuildRequires:	libalsa-devel
+Patch2:		aubio-linking.patch
+Patch3:		aubio-numarray-gnuplot.patch
 BuildRequires:	swig
-BuildRequires:	lash-devel
+BuildRequires:	pkgconfig(fftw3)
+BuildRequires:	pkgconfig(sndfile)
+BuildRequires:	pkgconfig(samplerate)
+BuildRequires:	pkgconfig(alsa)
+BuildRequires:	pkgconfig(lash-1.0)
 BuildRequires:	pd-devel
 BuildRequires:	docbook-to-man
 Requires:	%{libname} = %{version}-%{release}
-BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 
 %description
 A library for audio labelling. Its features include segmenting 
@@ -62,53 +63,38 @@ Python bindings for %{name}.
 %setup -q
 %patch0 -p1
 %patch1 -p0
+%patch2 -p1
+%patch3 -p1
 
 %build
 %define _disable_ld_no_undefined 1
 export CPPFLAGS="%{optflags} -I%{_includedir}/pd"
-%configure2_5x
+%configure2_5x --disable-static
 
 %make
 
 %install
-[ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
-
 %makeinstall_std
 
 %ifarch x86_64
 mv -f %{buildroot}%{_prefix}/lib/pd %{buildroot}%{_libdir}/pd
 %endif
 
-%if %mdkversion < 200900
-%post -n %{libname} -p /sbin/ldconfig
-%endif
-
-%if %mdkversion < 200900
-%postun -n %{libname} -p /sbin/ldconfig
-%endif
-
-%clean
-[ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
-
 %files
-%defattr(-,root,root)
 %doc AUTHORS README THANKS TODO
 %{_bindir}/*
 %{_datadir}/sounds/*
 %{_mandir}/man1/*
 
 %files -n %{libname}
-%defattr(-,root,root)
 %{_libdir}/*.so.%{major}*
 %{_libdir}/pd
-                  
+
 %files -n %{develname}
-%defattr(-,root,root)
 %{_includedir}/%{name}
 %{_libdir}/*.so
-%{_libdir}/*.*a
 %{_libdir}/pkgconfig/*.pc
 
 %files -n python-%{name}
-%defattr(-,root,root)
 %{python_sitelib}/*
+
