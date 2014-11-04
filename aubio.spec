@@ -54,7 +54,7 @@ Development files and headers for %{name}.
 Summary:	Python bindings for %{name}
 Group:		Development/Python
 Requires:	%{libname} = %{version}-%{release}
-BuildRequires: python-devel
+BuildRequires: pkgconfig(python2)
 
 %description -n python-%{name}
 Python bindings for %{name}.
