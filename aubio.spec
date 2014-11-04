@@ -5,7 +5,7 @@
 Summary:	A library for audio labelling
 Name:		aubio
 Version:	0.3.2
-Release:	8
+Release:	9
 License:	GPLv2+
 Group:		Sound
 Url:		http://aubio.org/
@@ -68,6 +68,8 @@ Python bindings for %{name}.
 
 %build
 %define _disable_ld_no_undefined 1
+export CC=gcc
+export PYTHON=%__python2
 export CPPFLAGS="%{optflags} -I%{_includedir}/pd"
 %configure2_5x --disable-static
 
@@ -96,5 +98,5 @@ mv -f %{buildroot}%{_prefix}/lib/pd %{buildroot}%{_libdir}/pd
 %{_libdir}/pkgconfig/*.pc
 
 %files -n python-%{name}
-%{python_sitelib}/*
+%{python2_sitelib}/*
 
