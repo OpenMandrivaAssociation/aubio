@@ -80,7 +80,6 @@ export LDFLAGS="%ldflags -lm"
 
 %files
 %{_bindir}/*
-%{_datadir}/doc/libaubio*
 
 %files -n %{libname}
 %{_libdir}/*.so.%{major}*
