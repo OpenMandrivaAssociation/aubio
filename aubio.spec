@@ -1,19 +1,15 @@
-%define major 2
+%define major 5
 %define libname %mklibname %{name} %{major}
 %define develname %mklibname %{name} -d
 
 Summary:	A library for audio labelling
 Name:		aubio
-Version:	0.3.2
-Release:	10
+Version:	0.4.3
+Release:	1
 License:	GPLv2+
 Group:		Sound
 Url:		http://aubio.org/
 Source0:	http://aubio.org/pub/%{name}-%{version}.tar.bz2
-Patch0:		%{name}-0.3.2-format_not_a_string_literal_and_no_format_arguments.patch
-Patch1:		aubio-0.3.2-fix-link.patch
-Patch2:		aubio-linking.patch
-Patch3:		aubio-numarray-gnuplot.patch
 BuildRequires:	swig
 BuildRequires:	pkgconfig(fftw3)
 BuildRequires:	pkgconfig(sndfile)
@@ -54,43 +50,40 @@ Development files and headers for %{name}.
 Summary:	Python bindings for %{name}
 Group:		Development/Python
 Requires:	%{libname} = %{version}-%{release}
-BuildRequires: pkgconfig(python2)
+BuildRequires: pkgconfig(python3)
+BuildRequires: python-setuptools
+BuildRequires: python-numpy
+BuildRequires: python-numpy-devel
 
 %description -n python-%{name}
 Python bindings for %{name}.
 
 %prep
 %setup -q
-%patch0 -p1
-%patch1 -p0
-%patch2 -p1
-%patch3 -p1
+%apply_patches
 
 %build
 %define _disable_ld_no_undefined 1
-export CC=gcc
+#export CC=gcc
 export PYTHON=%__python2
-export CPPFLAGS="%{optflags} -I%{_includedir}/pd"
-%configure2_5x --disable-static
 
-%make
+export CPPFLAGS="%{optflags} -I%{_includedir}/pd"
+export LDFLAGS="%ldflags -lm"
+%{__python2} ./waf configure --prefix=/usr \
+    --libdir=%{_libdir} CC=%{__cc}
+
+%{__python2} ./waf build CC=%{__cc}
 
 %install
-%makeinstall_std
-
-%ifarch x86_64
-mv -f %{buildroot}%{_prefix}/lib/pd %{buildroot}%{_libdir}/pd
-%endif
+%{__python2} ./waf install --destdir="%{buildroot}"
+%{__python} setup.py install --root=%{buildroot}
 
 %files
-%doc AUTHORS README THANKS TODO
 %{_bindir}/*
-%{_datadir}/sounds/*
-%{_mandir}/man1/*
+%{_datadir}/doc/libaubio*
 
 %files -n %{libname}
 %{_libdir}/*.so.%{major}*
-%{_libdir}/pd
 
 %files -n %{develname}
 %{_includedir}/%{name}
@@ -98,5 +91,4 @@ mv -f %{buildroot}%{_prefix}/lib/pd %{buildroot}%{_libdir}/pd
 %{_libdir}/pkgconfig/*.pc
 
 %files -n python-%{name}
-%{python2_sitelib}/*
-
+%{python_sitearch}/*
