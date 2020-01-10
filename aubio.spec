@@ -60,7 +60,7 @@ Python bindings for %{name}.
 
 %prep
 %setup -q
-%apply_patches
+%autopatch -p1
 
 %build
 %define _disable_ld_no_undefined 1
