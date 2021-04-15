@@ -93,7 +93,9 @@ find %{buildroot} -name '*.la' -delete
 rm %{buildroot}/%{_libdir}/libaubio.a
 
 %files
+%doc %{_docdir}/libaubio-doc
 %{_bindir}/*
+%{_mandir}/man1/aubio*
 
 %files -n %{libname}
 %{_libdir}/*.so.%{major}*
