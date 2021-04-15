@@ -4,7 +4,7 @@
 
 Summary:	A library for audio labelling
 Name:		aubio
-Version:	0.4.7
+Version:	0.4.9
 Release:	1
 License:	GPLv2+
 Group:		Sound
@@ -64,19 +64,19 @@ Python bindings for %{name}.
 
 %build
 %define _disable_ld_no_undefined 1
-#export CC=gcc
-export PYTHON=%__python2
+%set_build_flags
+./waf configure --prefix=%{_prefix} \
+    --libdir=%{_libdir}
+./waf build -v
 
-export CPPFLAGS="%{optflags} -I%{_includedir}/pd"
-export LDFLAGS="%ldflags -lm"
-%{__python2} ./waf configure --prefix=/usr \
-    --libdir=%{_libdir} CC=%{__cc}
-
-%{__python2} ./waf build CC=%{__cc}
+# python3
+%py_build
 
 %install
-%{__python2} ./waf install --destdir="%{buildroot}"
-%{__python} setup.py install --root=%{buildroot}
+./waf install --destdir=%{buildroot}
+
+# python3
+%py_install
 
 %files
 %{_bindir}/*
