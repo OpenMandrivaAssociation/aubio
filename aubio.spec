@@ -4,20 +4,29 @@
 
 Summary:	A library for audio labelling
 Name:		aubio
-Version:	0.4.3
+Version:	0.4.9
 Release:	1
 License:	GPLv2+
 Group:		Sound
 Url:		http://aubio.org/
 Source0:	http://aubio.org/pub/%{name}-%{version}.tar.bz2
+
+BuildRequires:	doxygen
+BuildRequires:	docbook-to-man
+BuildRequires:  txt2man
 BuildRequires:	swig
 BuildRequires:	pkgconfig(fftw3)
 BuildRequires:	pkgconfig(sndfile)
 BuildRequires:	pkgconfig(samplerate)
 BuildRequires:	pkgconfig(alsa)
 BuildRequires:	pkgconfig(lash-1.0)
-BuildRequires:	pd-devel
-BuildRequires:	docbook-to-man
+BuildRequires:  pkgconfig(jack)
+BuildRequires:	pkgconfig(pd)
+BuildRequires:  pkgconfig(libavcodec)
+BuildRequires:  pkgconfig(libavdevice)
+BuildRequires:  pkgconfig(libavformat)
+BuildRequires:  pkgconfig(libavresample)
+BuildRequires:  pkgconfig(libavutil)
 Requires:	%{libname} = %{version}-%{release}
 
 %description
@@ -50,7 +59,8 @@ Development files and headers for %{name}.
 Summary:	Python bindings for %{name}
 Group:		Development/Python
 Requires:	%{libname} = %{version}-%{release}
-BuildRequires: pkgconfig(python3)
+BuildRequires: pkgconfig(python)
+BuildRequires: python3dist(sphinx)
 BuildRequires: python-setuptools
 BuildRequires: python-numpy
 BuildRequires: python-numpy-devel
@@ -64,22 +74,28 @@ Python bindings for %{name}.
 
 %build
 %define _disable_ld_no_undefined 1
-#export CC=gcc
-export PYTHON=%__python2
+%set_build_flags
+./waf configure --prefix=%{_prefix} \
+    --libdir=%{_libdir}
+./waf build -v
 
-export CPPFLAGS="%{optflags} -I%{_includedir}/pd"
-export LDFLAGS="%ldflags -lm"
-%{__python2} ./waf configure --prefix=/usr \
-    --libdir=%{_libdir} CC=%{__cc}
-
-%{__python2} ./waf build CC=%{__cc}
+# python3
+%py_build
 
 %install
-%{__python2} ./waf install --destdir="%{buildroot}"
-%{__python} setup.py install --root=%{buildroot}
+./waf install --destdir=%{buildroot}
+
+# python3
+%py_install
+
+# we don't want these
+find %{buildroot} -name '*.la' -delete
+rm %{buildroot}/%{_libdir}/libaubio.a
 
 %files
+%doc %{_docdir}/libaubio-doc
 %{_bindir}/*
+%{_mandir}/man1/aubio*
 
 %files -n %{libname}
 %{_libdir}/*.so.%{major}*
