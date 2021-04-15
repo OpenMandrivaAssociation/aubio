@@ -10,14 +10,23 @@ License:	GPLv2+
 Group:		Sound
 Url:		http://aubio.org/
 Source0:	http://aubio.org/pub/%{name}-%{version}.tar.bz2
+
+BuildRequires:	doxygen
+BuildRequires:	docbook-to-man
+BuildRequires:  txt2man
 BuildRequires:	swig
 BuildRequires:	pkgconfig(fftw3)
 BuildRequires:	pkgconfig(sndfile)
 BuildRequires:	pkgconfig(samplerate)
 BuildRequires:	pkgconfig(alsa)
 BuildRequires:	pkgconfig(lash-1.0)
+BuildRequires:  pkgconfig(jack)
 BuildRequires:	pkgconfig(pd)
-BuildRequires:	docbook-to-man
+BuildRequires:  pkgconfig(libavcodec)
+BuildRequires:  pkgconfig(libavdevice)
+BuildRequires:  pkgconfig(libavformat)
+BuildRequires:  pkgconfig(libavresample)
+BuildRequires:  pkgconfig(libavutil)
 Requires:	%{libname} = %{version}-%{release}
 
 %description
@@ -50,7 +59,8 @@ Development files and headers for %{name}.
 Summary:	Python bindings for %{name}
 Group:		Development/Python
 Requires:	%{libname} = %{version}-%{release}
-BuildRequires: pkgconfig(python3)
+BuildRequires: pkgconfig(python)
+BuildRequires: python3dist(sphinx)
 BuildRequires: python-setuptools
 BuildRequires: python-numpy
 BuildRequires: python-numpy-devel
