@@ -16,7 +16,7 @@ BuildRequires:	pkgconfig(sndfile)
 BuildRequires:	pkgconfig(samplerate)
 BuildRequires:	pkgconfig(alsa)
 BuildRequires:	pkgconfig(lash-1.0)
-BuildRequires:	pd-devel
+BuildRequires:	pkgconfig(pd)
 BuildRequires:	docbook-to-man
 Requires:	%{libname} = %{version}-%{release}
 
