@@ -78,6 +78,10 @@ Python bindings for %{name}.
 # python3
 %py_install
 
+# we don't want these
+find %{buildroot} -name '*.la' -delete
+rm %{buildroot}/%{_libdir}/libaubio.a
+
 %files
 %{_bindir}/*
 
