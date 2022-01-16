@@ -5,11 +5,12 @@
 Summary:	A library for audio labelling
 Name:		aubio
 Version:	0.4.9
-Release:	1
+Release:	2
 License:	GPLv2+
 Group:		Sound
 Url:		http://aubio.org/
 Source0:	http://aubio.org/pub/%{name}-%{version}.tar.bz2
+Patch0:		aubio-0.4.9-ffmpeg-5.0.patch
 
 BuildRequires:	doxygen
 BuildRequires:	docbook-to-man
@@ -25,7 +26,6 @@ BuildRequires:	pkgconfig(pd)
 BuildRequires:  pkgconfig(libavcodec)
 BuildRequires:  pkgconfig(libavdevice)
 BuildRequires:  pkgconfig(libavformat)
-BuildRequires:  pkgconfig(libavresample)
 BuildRequires:  pkgconfig(libavutil)
 Requires:	%{libname} = %{version}-%{release}
 
