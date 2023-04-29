@@ -11,12 +11,12 @@ Group:		Sound
 Url:		http://aubio.org/
 Source0:	http://aubio.org/pub/%{name}-%{version}.tar.bz2
 Patch0:		aubio-0.4.9-ffmpeg-5.0.patch
+Patch1:     %{name}-python39.patch
 
 BuildRequires:	doxygen
 BuildRequires:	docbook-to-man
 BuildRequires:  txt2man
 BuildRequires:	swig
-BuildRequires:  waf
 BuildRequires:	pkgconfig(fftw3)
 BuildRequires:	pkgconfig(sndfile)
 BuildRequires:	pkgconfig(samplerate)
