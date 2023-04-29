@@ -1,3 +1,5 @@
+%global optflags %{optflags} -Wno-incompatible-function-pointer-types
+
 %define major 5
 %define libname %mklibname %{name} %{major}
 %define develname %mklibname %{name} -d
