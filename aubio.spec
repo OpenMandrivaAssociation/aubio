@@ -16,6 +16,7 @@ BuildRequires:	doxygen
 BuildRequires:	docbook-to-man
 BuildRequires:  txt2man
 BuildRequires:	swig
+BuildRequires:  waf
 BuildRequires:	pkgconfig(fftw3)
 BuildRequires:	pkgconfig(sndfile)
 BuildRequires:	pkgconfig(samplerate)
