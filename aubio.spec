@@ -7,7 +7,7 @@
 Summary:	A library for audio labelling
 Name:		aubio
 Version:	0.4.9
-Release:	3
+Release:	4
 License:	GPLv2+
 Group:		Sound
 Url:		http://aubio.org/
