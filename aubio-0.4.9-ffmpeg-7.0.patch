@@ -1,5 +1,5 @@
 --- aubio-0.4.9/src/io/source_avcodec.c.orig	2024-04-14 23:09:02.187890285 +0100
-+++ aubio-0.4.9/src/io/source_avcodec.c	2024-04-14 23:12:44.256674540 +0100
++++ aubio-0.4.9/src/io/source_avcodec.c	2024-04-14 23:34:02.644072531 +0100
 @@ -259,7 +259,7 @@
  
    /* get input specs */
@@ -9,19 +9,29 @@
    //AUBIO_DBG("input_samplerate: %d\n", s->input_samplerate);
    //AUBIO_DBG("input_channels: %d\n", s->input_channels);
  
-@@ -312,8 +312,10 @@
+@@ -312,16 +312,18 @@
    // create or reset resampler to/from mono/multi-channel
    if ( s->avr == NULL ) {
      int err;
 -    int64_t input_layout = av_get_default_channel_layout(s->input_channels);
 -    int64_t output_layout = av_get_default_channel_layout(s->input_channels);
-+    AVChannelLayout layout;
-+    av_channel_layout_default(&layout,s->input_channels);
-+    int64_t input_layout = layout.u.mask;
-+    int64_t output_layout = layout.u.mask;
++    AVChannelLayout input_layout;
++    av_channel_layout_default(&input_layout,s->input_channels);
++    AVChannelLayout output_layout;
++    av_channel_layout_default(&output_layout,s->input_channels);
  #ifdef HAVE_AVRESAMPLE
      AVAudioResampleContext *avr = avresample_alloc_context();
  #elif defined(HAVE_SWRESAMPLE)
+     SwrContext *avr = swr_alloc();
+ #endif /* HAVE_AVRESAMPLE || HAVE_SWRESAMPLE */
+ 
+-    av_opt_set_int(avr, "in_channel_layout",  input_layout,              0);
+-    av_opt_set_int(avr, "out_channel_layout", output_layout,             0);
++    av_opt_set_chlayout(avr, "in_chlayout",  &input_layout,              0);
++    av_opt_set_chlayout(avr, "out_chlayout", &output_layout,             0);
+     av_opt_set_int(avr, "in_sample_rate",     s->input_samplerate,       0);
+     av_opt_set_int(avr, "out_sample_rate",    s->samplerate,             0);
+     av_opt_set_int(avr, "in_sample_fmt",      s->avCodecCtx->sample_fmt, 0);
 @@ -369,7 +371,7 @@
    int out_samples = 0;
  #elif defined(HAVE_SWRESAMPLE)
