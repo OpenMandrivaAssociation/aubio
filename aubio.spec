@@ -13,8 +13,9 @@ Group:		Sound
 Url:		http://aubio.org/
 Source0:	http://aubio.org/pub/%{name}-%{version}.tar.bz2
 Patch0:		aubio-0.4.9-ffmpeg-5.0.patch
-Patch1:     %{name}-python39.patch
-Patch2:     https://github.com/aubio/aubio/commit/cdfe9cef2dcc3edf7d05ca2e9c2dbbf8dea21f1c.patch
+Patch1:		%{name}-python39.patch
+Patch2:		https://github.com/aubio/aubio/commit/cdfe9cef2dcc3edf7d05ca2e9c2dbbf8dea21f1c.patch
+Patch3:		aubio-0.4.9-ffmpeg-7.0.patch
 
 BuildRequires:	doxygen
 BuildRequires:	docbook-to-man
