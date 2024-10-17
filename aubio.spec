@@ -10,7 +10,7 @@ Version:	0.4.9
 Release:	4
 License:	GPLv2+
 Group:		Sound
-Url:		http://aubio.org/
+Url:		https://aubio.org/
 Source0:	http://aubio.org/pub/%{name}-%{version}.tar.bz2
 Patch0:		aubio-0.4.9-ffmpeg-5.0.patch
 Patch1:		%{name}-python39.patch
