@@ -1,0 +1,27 @@
+diff -rupN aubio-0.4.9.old/python/lib/aubio/cmd.py aubio-0.4.9/python/lib/aubio/cmd.py
+--- aubio-0.4.9.old/python/lib/aubio/cmd.py	2018-12-10 18:15:31.000000000 +0100
++++ aubio-0.4.9/python/lib/aubio/cmd.py	2025-07-10 12:06:36.868381400 +0200
+@@ -1,4 +1,4 @@
+-#! /usr/bin/env python
++#! /usr/bin/python
+ # -*- coding: utf-8 -*-
+ 
+ """aubio command line tool
+diff -rupN aubio-0.4.9.old/python/lib/aubio/cut.py aubio-0.4.9/python/lib/aubio/cut.py
+--- aubio-0.4.9.old/python/lib/aubio/cut.py	2018-12-10 18:15:31.000000000 +0100
++++ aubio-0.4.9/python/lib/aubio/cut.py	2025-07-10 12:06:11.791370761 +0200
+@@ -1,4 +1,4 @@
+-#! /usr/bin/env python
++#! /usr/bin/python
+ 
+ """ this file was written by Paul Brossier
+   it is released under the GNU/GPL license.
+diff -rupN aubio-0.4.9.old/python/lib/aubio/__init__.py aubio-0.4.9/python/lib/aubio/__init__.py
+--- aubio-0.4.9.old/python/lib/aubio/__init__.py	2018-12-10 18:15:31.000000000 +0100
++++ aubio-0.4.9/python/lib/aubio/__init__.py	2025-07-10 12:06:18.493727307 +0200
+@@ -1,4 +1,4 @@
+-#! /usr/bin/env python
++#! /usr/bin/python
+ # -*- coding: utf8 -*-
+ 
+ """
