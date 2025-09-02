@@ -18,6 +18,7 @@ Patch1:	aubio-python39.patch
 Patch2:	https://github.com/aubio/aubio/commit/cdfe9cef2dcc3edf7d05ca2e9c2dbbf8dea21f1c.patch
 Patch3:	aubio-0.4.9-ffmpeg-7.0.patch
 Patch4:	aubio-0.4.9-fix-python-shebangs.patch
+Patch5:	aubio-0.4.9-ffmpeg-8.0.patch
 BuildRequires:	docbook-to-man
 BuildRequires:	doxygen
 BuildRequires:	swig

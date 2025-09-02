@@ -1,0 +1,20 @@
+diff -rupN aubio-0.4.9.old/src/io/source_avcodec.c aubio-0.4.9/src/io/source_avcodec.c
+--- aubio-0.4.9.old/src/io/source_avcodec.c	2025-09-02 18:16:23.909055669 +0200
++++ aubio-0.4.9/src/io/source_avcodec.c	2025-09-02 18:21:47.174616804 +0200
+@@ -62,11 +62,16 @@
+ #include "ioutils.h"
+ #include "source_avcodec.h"
+ 
++/*
++ * FFMPEG >= 8 removed deprecated AV_INPUT_BUFFER_MIN_SIZE:
++ * use directly its original value for AUBIO_AVCODEC_MAX_BUFFER_SIZE
+ #if LIBAVCODEC_VERSION_INT < AV_VERSION_INT(56, 56, 0)
+ #define AUBIO_AVCODEC_MAX_BUFFER_SIZE FF_MIN_BUFFER_SIZE
+ #else
+ #define AUBIO_AVCODEC_MAX_BUFFER_SIZE AV_INPUT_BUFFER_MIN_SIZE
+ #endif
++*/
++#define AUBIO_AVCODEC_MAX_BUFFER_SIZE 16384
+ 
+ #if LIBAVCODEC_VERSION_MAJOR >= 59
+ #define FF_API_LAVF_AVCTX 1
